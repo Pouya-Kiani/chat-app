@@ -36,7 +36,8 @@ function App() {
 }
 
 const mapStateToProps = state => ({
-  ...state.auth
+  ...state.auth,
+  ...state.chat
 })
 const mapDispatchToProps = dispatch => ({
 
