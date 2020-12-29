@@ -4,5 +4,5 @@ import chat from './chatReducer'
 
 export default combineReducers({
   auth,
-  chat,
+  chat
 })
