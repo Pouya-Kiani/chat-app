@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
+import { connect } from 'react-redux'
 
 
 function App() {
@@ -34,4 +35,13 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  ...state.auth
+})
+const mapDispatchToProps = dispatch => ({
+
+})
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(App);
