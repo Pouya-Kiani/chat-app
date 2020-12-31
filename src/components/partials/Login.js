@@ -17,7 +17,7 @@ class Login extends Component {
       this.props.socket.send(JSON.stringify({
         type: 'LOGIN',
         data: {
-          username: values.username,
+          email: values.email,
           password: values.password
         }
       }))
@@ -30,7 +30,7 @@ class Login extends Component {
   }
 
   LoginSchema = Yup.object().shape({
-    username: Yup.string('Invalid username')
+    email: Yup.string('Invalid username')
       .required('This field is required'),
     password: Yup.string('Invalid password')
       .required('This field is required')
@@ -41,7 +41,7 @@ class Login extends Component {
       <div className='page-wrapper'>    
         <Formik 
           initialValues={{
-            username: '',
+            email: '',
             password: ''
           }}
           validationSchema={this.LoginSchema}
@@ -52,11 +52,11 @@ class Login extends Component {
             <h3 className="form-header">Login</h3>
             <div className="input-field">
               <Field 
-                name="username"
-                className={`text-input${errors.username && touched.username ? ' error' : ''}`}
-                placeholder='username'
+                name="email"
+                className={`text-input${errors.email && touched.email ? ' error' : ''}`}
+                placeholder='E-mail'
               />
-              {errors.username && touched.username ? <div className="error-message">{errors.username}</div> : null}
+              {errors.email && touched.email ? <div className="error-message">{errors.email}</div> : null}
             </div>
             <div className="input-field">
               <Field 
