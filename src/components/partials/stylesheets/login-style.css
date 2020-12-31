@@ -49,6 +49,17 @@
   width: 50%;
   margin: 0 25% 30px 25%;
 }
+.text-input.error,
 .form-submit.error {
   outline: 1px solid red;
+}
+.input-field {
+  position: relative;
+  padding-bottom: 10px;
+}
+.error-message {
+  position: absolute;
+  top: 35px;
+  color: red;
+  font-size: 0.8em;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 
 import './stylesheets/login-style.css'
 
@@ -8,21 +10,15 @@ import * as AuthActions from '../../store/actions/authActions'
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      password: ''
-    }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this);
   }
-  handleFormSubmit(event) {
-    event.preventDefault()
+  handleFormSubmit(values) {
     if(this.props.socket) {
       this.props.socket.send(JSON.stringify({
         type: 'LOGIN',
         data: {
-          username: this.state.username,
-          password: this.state.password
+          username: values.username,
+          password: values.password
         }
       }))
     }
@@ -32,31 +28,56 @@ class Login extends Component {
       [target.name]: target.value
     })
   }
+
+  LoginSchema = Yup.object().shape({
+    username: Yup.string('Invalid username')
+      .required('This field is required'),
+    password: Yup.string('Invalid password')
+      .required('This field is required')
+  })
+
   render() {
     return (
-      <div className='page-wrapper'>
-        <form onSubmit={this.handleFormSubmit} className="form-wrapper">
-          <h3 className="form-header">Login</h3>
-          <input 
-            className="text-input" 
-            type="text" 
-            name="username" 
-            id="username"
-            placeholder="User Name"
-            value={this.state.username}
-            onChange={this.handleChange}/>
-          <input 
-            className="text-input" 
-            type="password" 
-            name="password" 
-            id="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}/>
-          <button className="form-submit">Login!</button>
-          <br />
-          <p>Don't have an account? <Link to='/signup'>Sign Up</Link>.</p>
-        </form>
+      <div className='page-wrapper'>    
+        <Formik 
+          initialValues={{
+            username: '',
+            password: ''
+          }}
+          validationSchema={this.LoginSchema}
+          onSubmit={this.handleFormSubmit}
+        >
+          {({ errors, touched }) => (
+          <Form className="form-wrapper">
+            <h3 className="form-header">Login</h3>
+            <div className="input-field">
+              <Field 
+                name="username"
+                className={`text-input${errors.username && touched.username ? ' error' : ''}`}
+                placeholder='username'
+              />
+              {errors.username && touched.username ? <div className="error-message">{errors.username}</div> : null}
+            </div>
+            <div className="input-field">
+              <Field 
+                name="password"
+                className={`text-input${errors.password && touched.password ? ' error' : ''}`}
+                placeholder='password'
+                type='password'
+              />
+              {errors.password && touched.password ? <div className="error-message">{errors.password}</div> : null}
+            </div>
+            <button 
+              type="submit"
+              className='form-submit'>
+              Login
+            </button>
+            <br />
+            <p>Don't have an account? <Link to='/signup'>Sign Up</Link>.</p>
+          </Form>
+          )}
+        </Formik>
+          
       </div>
     );
   }
