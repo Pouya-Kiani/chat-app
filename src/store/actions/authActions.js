@@ -18,3 +18,21 @@ export const Login = (loginInfo) => {
     })
   }
 }
+
+export const logOut = () => {
+  return dispatch => {
+    dispatch({
+      type: 'LOGOUT',
+      payload: null
+    })
+  }
+}
+
+export const loggedIn = (data) => {
+  return dispatch => {
+    dispatch({
+      type: 'LOGGEDIN',
+      payload: data
+    })
+  }
+}

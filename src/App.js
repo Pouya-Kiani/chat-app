@@ -1,11 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import {BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux'
+
+import Auth from './components/pages/Auth'
 import * as ChatActions from './store/actions/chatActions'
+import * as AuthActions from './store/actions/authActions'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import Auth from './components/pages/Auth'
 
 class App extends Component {
   componentDidMount() {
@@ -16,10 +18,21 @@ class App extends Component {
     return (
       <Fragment>
         <BrowserRouter>
+          
           <Switch>
             <Route
               path='/login'
-              component={Auth}
+              render={props => {
+                if(this.props.token) {
+                  return (
+                    <Redirect to='/' />
+                  )
+                } else {
+                  return (
+                    <Auth />
+                  )
+                }
+              }}
             />
             <Route
               path='/signup'
@@ -35,7 +48,10 @@ class App extends Component {
                   )
                 } else {
                   return (
-                    <h1>Root</h1>
+                    <Fragment >
+                      <h1>Root</h1>
+                      <button onClick={this.props.logOut}>Log Out</button>
+                    </Fragment>
                   );
                 }
               }}
@@ -69,6 +85,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setupSocket: () => {
     dispatch(ChatActions.setupSocket())
+  },
+  logOut: () => {
+    dispatch(AuthActions.logOut());
   }
 })
 export default connect(
