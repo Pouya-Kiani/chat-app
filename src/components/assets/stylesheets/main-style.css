@@ -1,0 +1,73 @@
+.sidebar {
+  background: #fff;
+  float: left;
+  width: 300px;
+  max-width: 25%;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+  position: fixed;
+  top: 0px;
+}
+.main-view {
+  position: fixed;
+  left: 300px;
+  background: #fafafa;
+  height: 100vh;
+  width: 100%;
+}
+
+ul.thread-list {
+  list-style: none;
+  padding: 0px;
+}
+
+li.thread-short-view i {
+  float: left;
+  font-size: 48px;
+  padding: 5px 15px;
+  color: #ccc;
+}
+li.thread-short-view a {
+  text-decoration: none;
+  color: #333;
+}
+li.thread-short-view h5 {
+  font-size: 14px;
+  padding: 5px 10px;
+  font-weight: 700;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+li.thread-short-view p {
+  font-size: 14px;
+  color: #999;
+}
+
+.thread-list-label {
+  padding-left: 20px;
+  font-size: 12px;
+  color: #aaa;
+  padding-top: 10px;
+}
+
+.input-view {
+  position: fixed;
+  left: 300px;
+  width: 100%;
+  bottom: 0;
+}
+
+.input-view .form-control {
+  border: none;
+  border-radius: 0px;
+  border-top: 1px solid #eee;
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+  padding: 10px;
+  height: auto;
+}
+.logout-button {
+  position: fixed;
+  left: 300px;
+}

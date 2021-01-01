@@ -7,6 +7,7 @@ import * as ChatActions from './store/actions/chatActions'
 import * as AuthActions from './store/actions/authActions'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Messenger from './components/pages/Messenger';
 
 
 class App extends Component {
@@ -50,7 +51,8 @@ class App extends Component {
                   return (
                     <Fragment >
                       <h1>Root</h1>
-                      <button onClick={this.props.logOut}>Log Out</button>
+                      <button className="logout-button" onClick={this.props.logOut}>Log Out</button>
+                      <Messenger />
                     </Fragment>
                   );
                 }
@@ -66,12 +68,6 @@ class App extends Component {
             /> */}
           </Switch>
         </BrowserRouter>
-         <button onClick={ev => {
-           ev.preventDefault();
-           if(this.props.socket) {
-             this.props.socket.send(JSON.stringify({message: 'Hello Server!'}));
-           }
-         }} >Send message</button>
       </Fragment>
     );
   }

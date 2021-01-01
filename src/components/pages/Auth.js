@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 import Login from '../partials/Login';
 import Signup from '../partials/Signup'
-import * as AuthActions from '../../store/actions/authActions';
+// import * as AuthActions from '../../store/actions/authActions'; // uncomment when needed!
 
 class Auth extends Component {
   render() {
