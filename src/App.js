@@ -37,7 +37,17 @@ class App extends Component {
             />
             <Route
               path='/signup'
-              component={Auth}
+              render={props => {
+                if(this.props.token) {
+                  return (
+                    <Redirect to='/' />
+                  )
+                } else {
+                  return (
+                    <Auth />
+                  )
+                }
+              }}
             />
             <Route 
               path='/'
@@ -51,7 +61,7 @@ class App extends Component {
                   return (
                     <Fragment >
                       <h1>Root</h1>
-                      <button className="logout-button" onClick={this.props.logOut}>Log Out</button>
+                      <button className="logout-button form-submit" onClick={this.props.logOut}>Log Out</button>
                       <Messenger />
                     </Fragment>
                   );

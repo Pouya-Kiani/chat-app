@@ -67,7 +67,7 @@ class Signup extends Component {
           {({ errors, touched }) => ( 
             <Form className="form-wrapper" >
               <h3 className="form-header">Sign Up</h3>
-              <div class="form-row">
+              <div className="form-row">
                 <div className="input-field">
                   <Field 
                     name="firstName"
@@ -86,7 +86,7 @@ class Signup extends Component {
                 </div>
               </div>
 
-              <div class="form-row">
+              <div className="form-row">
                 <div className="input-field">
                   <Field 
                     name="email"
@@ -105,7 +105,7 @@ class Signup extends Component {
                 </div>
               </div>
 
-              <div class="form-row">
+              <div className="form-row">
                 <div className="input-field">
                   <Field 
                     name="password"
