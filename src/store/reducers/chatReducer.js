@@ -2,7 +2,8 @@ const defaultState = {
   socket: null, 
   message: '',
   threads: {}, 
-  currentThread: ''
+  currentThread: '',
+  users: null,
 };
 
 const chat = (state = defaultState, action) => {
@@ -12,6 +13,21 @@ const chat = (state = defaultState, action) => {
         ...state,
         socket: action.payload
       };
+    case 'CLOSED_SOCKET': 
+      return {
+        ...state,
+        socket: null
+      };
+    case 'SEARCH': 
+      return {
+        ...state,
+        search: action.payload
+      };
+    case 'GOT_USERS': 
+    return {
+      ...state,
+      users: action.payload
+    };
     default:
       return state;
   }
