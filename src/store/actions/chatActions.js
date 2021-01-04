@@ -27,6 +27,12 @@ export const setupSocket = () => {
             payload
           })
           break;
+        case 'ADD_THREAD': 
+          dispatch({
+            type: 'ADD_THREAD',
+            payload: data.data,
+          })
+          break;
         default:
           // Do nothing
           break;
