@@ -68,6 +68,24 @@ class App extends Component {
                 }
               }}
             />
+            <Route 
+              path='/:threadId'
+              render={props => {
+                if(!this.props.token) {
+                  return (
+                    <Redirect to='/login' />
+                  )
+                } else {
+                  return (
+                    <Fragment >
+                      <h1>Root</h1>
+                      <button className="logout-button form-submit" onClick={this.props.logOut}>Log Out</button>
+                      <Messenger />
+                    </Fragment>
+                  );
+                }
+              }}
+            />
             {/* <Route 
               path='/'
               render={props => {
