@@ -77,6 +77,15 @@ class Sidebar extends Component {
         ) : (
         <ul className='thread-list'>
           <label className="thread-list-label" htmlFor="">messages</label>
+          {this.props.threads.map((thread, key) => (
+            <li key={`thread_${key}`} className="thread-short-view">
+              <Link to={`/${thread.id}`} >
+                <i className="zmdi zmdi-account-circle zmdi-hc-lg" />
+                <h5>{thread.id}</h5>
+                <p>The last message</p>
+              </Link>
+            </li>  
+          ))}
           <li className="thread-short-view">
             <Link to='/thread' >
               <i className="zmdi zmdi-account-circle zmdi-hc-lg" />

@@ -1,9 +1,18 @@
 
 import * as AuthActions from './authActions'
-export const setupSocket = () => {
+export const setupSocket = (token, userId) => {
   return dispatch => {
     const socket = new WebSocket('ws://localhost:8085');
     socket.onopen = () => {
+      if(token) {
+        socket.send(JSON.stringify({
+          type: 'CONNECT_WITH_TOKEN',
+          data: {
+            token,
+            userId,
+          }
+        }))
+      }
       dispatch({
         type: 'SETUP_SOCKET',
         payload: socket
@@ -33,6 +42,12 @@ export const setupSocket = () => {
             payload: data.data,
           })
           break;
+        case 'INITIAL_THREADS':
+          dispatch({
+            type: 'INITIAL_THREADS',
+            payload: data.data,
+          })
+          break;
         default:
           // Do nothing
           break;
@@ -50,16 +65,10 @@ export const setupSocket = () => {
 
 export const search = (keyword, socket) => {
   return dispatch => {
-    if(!socket) {
-      console.log('connection closed')
-      console.log('reconnecting...')
-      dispatch(setupSocket())
-    } else {
-      socket.send(JSON.stringify({
-        type: 'SEARCH',
-        data: { keyword} 
-      }))
-    }
+    socket.send(JSON.stringify({
+      type: 'SEARCH',
+      data: { keyword} 
+    }))
     dispatch({
       type: 'SEARCH',
       payload: null

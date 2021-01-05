@@ -12,9 +12,15 @@ import Messenger from './components/pages/Messenger';
 
 class App extends Component {
   componentDidMount() {
-    console.log('mounted')
-    this.props.setupSocket();
+    this.props.setupSocket(this.props.token, this.props.user.id);
   }
+
+  // componentDidUpdate() {
+  //   if(this.props.socket === null) {
+  //     console.log('lost connection')
+  //     this.props.setupSocket(this.props.token, this.props.user.id);
+  //   }
+  // }
   render() {
     return (
       <Fragment>
@@ -107,8 +113,8 @@ const mapStateToProps = state => ({
   ...state.chat
 })
 const mapDispatchToProps = dispatch => ({
-  setupSocket: () => {
-    dispatch(ChatActions.setupSocket())
+  setupSocket: (token, userId) => {
+    dispatch(ChatActions.setupSocket(token, userId))
   },
   logOut: () => {
     dispatch(AuthActions.logOut());
